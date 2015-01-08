@@ -1,9 +1,9 @@
 <?php
 /**
- * Swatchable Plugin
+ * CSSNamespace Plugin
  *
- * This plugin adds Bootstrap namespace support provided by Simpli-Swatchable2. 
- * It simply adds a div surrounding downcast content that has the bootstrap class. 
+ * This plugin adds CSS namespace support by adding a div surrounding downcast content.
+ * A Namespaced stylesheet can then use that class to namespace its styles 
  * 
  * @package Downcast
  * @author Andrew Druffner <andrew@nomstock.com>
@@ -11,7 +11,7 @@
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
  * 
  */
-class Swatchable extends DowncastPlugin {
+class CSSNamespace extends DowncastPlugin {
 
     /**
      * Configure
@@ -50,8 +50,9 @@ class Swatchable extends DowncastPlugin {
 
 
         public function addOpeningTag( ) {
+   
 
-        echo ('<div '.$this->BOOTSTRAP_NAMESPACE.'>test' );
+        echo ('<div '.$this->BOOTSTRAP_NAMESPACE.'>' );
     }
 
         public function addClosingTag( ) {

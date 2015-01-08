@@ -1,45 +1,38 @@
-###Simpliwp-Downcast
+###DowncastWP
 
-The Simpliwp-Downcast WordPress plugin enables you to use much of the Downcast Framework from within WordPress.
-This allows you to easily port over content with just a few shortcodes.
+The DowncastWP WordPress plugin enables you to use much of the Downcast Framework from within WordPress.
+This allows you to easily use your Downcast content within WordPress without modification.
+
 
 
 The following features are supported:
 
 * skins
 * plugins
-* Markdown with the bootdown extension or other configured parser via its markdowner plugin
+* Markdown
 
 
-Most plugins are directly compatible from the original downcast code with no modificiations necessary.
-
-
-
-
-
-
+Most plugins are directly compatible with WordPress without having to modify their code.
 
 
 ##How to Add Content
 
+##Method 1##
+Use this method if you have no PHP within your Markdown file.
 
-##Todo/Planned
+1. Create a new WordPress page or post.
+2. Paste in any Downcast content or create new content by writing some Markdown.
 
-* Add a template redirect api (such as addPage) that will use template_include 
-to detect markdown urls and include the proper markdown file. 
-This should eliminate the need to 
-use shortcodes
-      add_filter( 'template_include', array($this,'include_template'), 1 );     
-        function include_template( $template ) {
 
-	if ( is_page( 'downcast' )  ) {
-            $this->downcast()->debugLog( '$template = ', $template, true, true );
 
-            $new_template = locate_template( array( 'portfolio-page-template.php' ) );
-		if ( '' != $new_template ) {
-			return $new_template ;
-		}
-	}
+##Method 2
 
-	return $template;
-}
+Use this method if you have PHP within your content, are using Downcast Forms, or simply wish to keep your files intact without having to add them to the WordPress database.
+
+1. Create a new WordPress page or post.
+2. Add the following shortcode
+
+        [downcast_content path="/path/to/content/file.md"]
+ 
+3. Edit the /path/to/content/file to be the path to your file. The file can be any extension. If its php, it will be parsed as php. The path can be an absolute path for the file system, or can be relative to the root of your webserver.       
+    

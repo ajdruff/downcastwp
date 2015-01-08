@@ -174,10 +174,7 @@ $this->addEmbedTag( 'CONTENT', "errors/404/index.md?page_not_found=" . $page_inf
 
 $this->_init();
 
-/*
- * initialize public
- */
-$this->init();
+
 
 }
 

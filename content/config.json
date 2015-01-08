@@ -49,9 +49,11 @@
                                     {
                                         "SharedScripts":
                                                 {"active": false},
+                                        "WordPress":
+                                                {"active": true},                                        
                                         "Forms":
                                                 {"active": true},
-                                        "Swatchable":
+                                        "CSSNamespace":
                                                 {"active": true}
                                     },
                             "SKINS_AVAILABLE":

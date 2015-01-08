@@ -6,7 +6,9 @@ include_once ("DowncastBase.php");
 * DowncastBaseWp (Parent Class)
 *
 * Manages the Downcast Web Framework when used within a WordPress plugin
-*
+* DowncastBaseWP should be limited to overriding those methods in DowncaseBase that are not compatible with WordPress
+ * All other WordPress specific functionality should go in DowncastWP 
+ * 
 * @package Downcast
 * @author Andrew Druffner <andrew@nomstock.com>
 * @copyright  2012 Andrew Druffner
