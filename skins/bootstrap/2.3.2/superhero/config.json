@@ -1,0 +1,56 @@
+{"SKIN":
+            {
+                "INFO":
+                        {
+                            "NAME": "Superhero",
+                            "DESCRIPTION": "Bootstrap Superhero swatch",
+                            "COMMENT": "http://bootswatch.com/",
+                            "VERSION": "2.3.2"
+
+                        },
+                "CONFIG":
+                        {
+                            "CSS":
+                                    [
+                                        {
+                                            "id": "bootstrap-fonts",
+                                            "active": true,
+                                            "inline": false,
+                                            "footer": false,
+                                            "path": "http://fonts.googleapis.com/css?family=Oswald%7CNoticia+Text"
+                                        },
+                                        {
+                                            "id": "bootstrap",
+                                            "active": true,
+                                            "inline": false,
+                                            "footer": false,
+                                            "path": "css/bootstrap.min.css"
+                                        },
+                                        {
+                                            "id": "bootstrap-responsive",
+                                            "active": true,
+                                            "inline": false,
+                                            "footer": false,
+                                            "path": "css/bootstrap-responsive.min.css"
+                                        }
+
+
+
+                                    ],
+                            "JS":
+                                    [
+                                        {
+                                            "id": "bootstrap",
+                                            "active": true,
+                                            "inline": false,
+                                            "footer": true,
+                                            "path": "js/bootstrap.min.js"
+                                        }
+
+
+                                    ]
+
+                        }
+            }
+}
+

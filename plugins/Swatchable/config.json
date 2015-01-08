@@ -1,0 +1,47 @@
+{"PLUGIN":
+            {
+                "INFO":
+                        {
+                            "NAME": "Swatchable",
+                            "DESCRIPTION": "Used for testing simpli-swatchable generated css. Adds a namespace around content.",
+                            "COMMENT": "",
+                            "VERSION": "1.0"
+
+                        },
+                "CONFIG":
+                        {
+                            "CSS":
+                                    [
+                                        {
+                                            "id": "example-css",
+                                            "active": false,
+                                            "inline": false,
+                                            "footer": false,
+                                            "path": "/add/path/to/css/here/style.css"
+                                        }
+
+
+
+                                    ],
+                            "JS":
+                                    [
+                                        {
+                                            "id": "example-script",
+                                            "active": false,
+                                            "inline": false,
+                                            "footer": false,
+                                            "path": "/add/path/to/css/here/script.js"
+                                        }
+
+
+
+                                    ]
+
+
+                        },
+                "EMBED_TAGS": {
+                },
+                "CONTENT_TAGS": {
+                }
+            }
+}  
