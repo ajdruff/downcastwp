@@ -37,8 +37,10 @@ DowncastPlugins.Forms.Forms = {
      * todo: narrow this selector to only those forms created by forms
      * @type {Event}
      **/
-    submitEvent: jQuery("form").submit(function(e) {
+       
+        //submitEvent: jQuery("form").bind("click", function(e) {
 
+submitEvent: jQuery("form").submit(function(e) {
 /*
  * if Downcast.plugins is not available, return 
  * this is so that forms using    
@@ -49,12 +51,21 @@ DowncastPlugins.Forms.Forms = {
         var form_id = jQuery(this).attr('id');
         var form=jQuery(this);
         /*
-         * Add the ajax action form field
+             * Add the ajax action form field if it already hasnt been added
          * This is consumed by ajax.php to figure out which method to call to process the form
          */
-        form.append('<input name="dc_ajax_action" type="hidden" value="' + Downcast.plugins.Forms[form_id].action + '">');
+      //  form.append('<input name="dc_ajax_action" type="hidden" value="' + Downcast.plugins.Forms[form_id].action + '">');
 
+            if (!jQuery('#dc_ajax_action').val()) {
+                var input = jQuery("<input>")
+                        .attr("type", "hidden")
+                        .attr("id", "dc_ajax_action")
+                        .attr("name", "dc_ajax_action").val(Downcast.plugins.Forms[form_id].action);
+                form.append(jQuery(input));
+            }
 
+            //  form.append('<input name="dc_ajax_action" type="hidden" value="' + Downcast.plugins.Forms[form_id].action + '">');
+            console.log('form appended');
         /*
          * Form Submit Event
          * 
