@@ -47,10 +47,12 @@
                                     },
                             "PLUGINS":
                                     {
+                                        "DemoForms":
+                                                {"active": false},
                                         "SharedScripts":
                                                 {"active": false},
                                         "WordPress":
-                                                {"active": true},                                        
+                                                {"active": true},
                                         "Forms":
                                                 {"active": true},
                                         "CSSNamespace":

@@ -36,3 +36,12 @@ Use this method if you have PHP within your content, are using Downcast Forms, o
  
 3. Edit the /path/to/content/file to be the path to your file. The file can be any extension. If its php, it will be parsed as php. The path can be an absolute path for the file system, or can be relative to the root of your webserver.       
     
+
+
+##Troubleshooting
+
+###Ajax Forms don't work
+
+Verify:
+* jquery 1.7.2+ is loaded in head
+* forms.js is loaded in head and comes after jquery

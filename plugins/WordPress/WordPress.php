@@ -1,4 +1,5 @@
 <?php
+
 /**
  * WordPress
  *
@@ -23,7 +24,16 @@ class WordPress extends DowncastPlugin {
      * @return void
      */
     public function config() {
-   
+
+        /*
+         * Force Jquery
+         * Do not set to true unless you've tried everything else.
+         * Even if set to false, WordPress will automatically load jQuery as long as you set deps to 'jquery' in config.json for your script
+         */
+        $this->FORCE_JQUERY = false;//TRUE will enqueue the version of jquery set in JQUERY_VERSION normally set to false. Jquery will automatically load as long as you set deps to 'jquery' in config.json
+        $this->JQUERY_VERSION = "1.7.2";//only used if FORCE_JQUERY is true
+
+
     }
 
     /**
@@ -40,12 +50,11 @@ class WordPress extends DowncastPlugin {
          * Add a WordPress Content Filter
          */
 
-add_filter( 'the_content', array( $this, 'hookContentFilter' ) );
-$this->addHooks();
+        add_filter( 'the_content', array( $this, 'hookContentFilter' ) );
+        $this->addHooks();
 
 
     }
-
 
     /**
      * Add Hooks
@@ -69,24 +78,38 @@ $this->addHooks();
 
 
 
+        /* 
+         * Force Jquery Support for a Specific Version
+         * Normally, you should never have to do this...
+         */
+
+
+
+        if ( $this->FORCE_JQUERY ) {
+            if ( !is_admin() )
+                add_action( "wp_enqueue_scripts", array( $this, "hookForceEnqueueJquery" ), 11 );
+
+}
 
 
         }
 
-
-
-        public function hookContentFilter($content ) {
-       //     $this->downcast()->debugLog( '$this->SITE = ', $this->downcast()->CONFIG['SITE']['CONFIG']['SAFE_PARSE'], true, true );
-
-     //  $this->downcast()->debugLog( '$content = ', $content, true, true );
-
-        return $this->downcast()->parseMarkdown($content);
-        
-#[downcast_content path="/plugins/Forms/content/my-first-ajax-form.php"]
-        
+    function hookForceEnqueueJquery() {
+        wp_deregister_script( 'jquery' );
+        wp_register_script( 'jquery', "http" . ($_SERVER[ 'SERVER_PORT' ] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/" . $this->JQUERY_VERSION  . "/jquery.min.js", false, null );
+        wp_enqueue_script( 'jquery' );
     }
 
-    
+    public function hookContentFilter( $content ) {
+        //     $this->downcast()->debugLog( '$this->SITE = ', $this->downcast()->CONFIG['SITE']['CONFIG']['SAFE_PARSE'], true, true );
+        //  $this->downcast()->debugLog( '$content = ', $content, true, true );
+
+        return $this->downcast()->parseMarkdown( $content );
+
+#[downcast_content path="/plugins/Forms/content/my-first-ajax-form.php"]
+
+    }
+
     /**
      *  hook - Shortcode - Include
      * 
@@ -182,6 +205,7 @@ $this->addHooks();
 
         return $content;
     }
+
     /**
      * Short Description
      *
