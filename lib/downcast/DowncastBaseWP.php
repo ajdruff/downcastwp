@@ -57,16 +57,26 @@ parent::addCssAndJs();
 * Converts a resource path into a string containining inline css or js, or resource links
 *
 *
-* @param $path string The path to the resource
+* @param $resource_relative_path string The path to the resource root directory
 * @param $css bool True if the resource is css, false if script
-* @param $inline bool True if you want the resources returned as inline, false to return as resource links
+* @param $resource array Resource properties as set in config.json
 * @return string A concatenated string containing the resources either as inline <style></style> and <script></script> tags or linked resource
 */
-protected function _implodeResource( $resource_relative_path, $path, $css = true, $inline = false ) {
+protected function _implodeResource( $resource_relative_path, $css = true, $resource ) {
+    $path=$resource['path'];
+    $inline=$resource[ 'inline' ]; //True if you want the resources returned as inline, false to return as resource links
+    $in_footer=$resource[ 'footer' ];
+    $deps=$resource[ 'deps' ];
+    $handle=$resource[ 'id' ];
+    
+
+//
+//
+//
 //initialize
 $string = '';
 
-
+$link='';
 
 
 
@@ -77,8 +87,6 @@ if ( preg_match( '/^http/', $path, $matches ) ){
 
 $url = $path;
 
-// todo: enqueue it depending on whether css or not
-
 
 } else
 /*
@@ -87,8 +95,12 @@ $url = $path;
 
 {
 
+
 $url = $this->file_joinPaths( $this->file_getRootUrl(),$resource_relative_path, $path );
 
+
+
+}
 if ( $inline ){
 
 $link = $this->addLeadingSlash( $this->file_joinPaths( $resource_relative_path, $path ) );
@@ -119,26 +131,26 @@ return $string;
 
 
 if ( $css ) {
-//todo: wp_enqueue style here
+
     
     
  
             
     wp_enqueue_style(
-$url, //$handle,
+$handle, //$handle,
 $url, //$src,
-null, //$deps,
+$deps, //$deps,
 1, //$ver,
 'all'//(optional) String specifying the media for which this stylesheet has been defined. Examples: 'all', 'screen', 'handheld', 'print'. See this list for the full range of valid CSS-media-types. Default: 'all' 
 );        
             
 } else {
 wp_enqueue_script(
-$url, //$handle,
+$handle, //$handle,
 $url, //$src,
-null, //$deps,
+$deps, //$deps,
 1, //$ver,
-false//$in_footer
+$in_footer//$in_footer
 );
 
 
@@ -148,7 +160,7 @@ false//$in_footer
 
 
 
-}
+
 
 
 
