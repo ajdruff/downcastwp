@@ -69,13 +69,20 @@ $this->addHooks();
 
 
 
+/* add jquery support */
+
+//if (!is_admin()) add_action("wp_enqueue_scripts", array($this,"fix_jquery"), 11);
 
 
         }
 
+    function fix_jquery() {
+        wp_deregister_script( 'jquery' );
+        wp_register_script( 'jquery', "http" . ($_SERVER[ 'SERVER_PORT' ] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js", false, null );
+        wp_enqueue_script( 'jquery' );
+    }
 
-
-        public function hookContentFilter($content ) {
+    public function hookContentFilter($content ) {
        //     $this->downcast()->debugLog( '$this->SITE = ', $this->downcast()->CONFIG['SITE']['CONFIG']['SAFE_PARSE'], true, true );
 
      //  $this->downcast()->debugLog( '$content = ', $content, true, true );
