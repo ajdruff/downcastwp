@@ -62,11 +62,11 @@ parent::addCssAndJs();
 * @param $inline bool True if you want the resources returned as inline, false to return as resource links
 * @return string A concatenated string containing the resources either as inline <style></style> and <script></script> tags or linked resource
 */
-protected function _implodeResource( $resource_relative_path, $path, $css = true, $inline = false ) {
+protected function _implodeResource( $resource_relative_path, $path, $css = true, $inline = false,$in_footer ) {
 //initialize
 $string = '';
 
-
+$link='';
 
 
 
@@ -77,8 +77,6 @@ if ( preg_match( '/^http/', $path, $matches ) ){
 
 $url = $path;
 
-// todo: enqueue it depending on whether css or not
-
 
 } else
 /*
@@ -86,9 +84,15 @@ $url = $path;
 */
 
 {
+$this->debugLog( '$this->file_getRootUrl() = ', $this->file_getRootUrl(), true, false );
+$this->debugLog( '$resource_relative_path = ', $resource_relative_path, true, false );
+$this->debugLog( '$path = ', $path, true, false );
 
 $url = $this->file_joinPaths( $this->file_getRootUrl(),$resource_relative_path, $path );
 
+
+
+}
 if ( $inline ){
 
 $link = $this->addLeadingSlash( $this->file_joinPaths( $resource_relative_path, $path ) );
@@ -119,7 +123,7 @@ return $string;
 
 
 if ( $css ) {
-//todo: wp_enqueue style here
+
     
     
  
@@ -138,7 +142,7 @@ $url, //$handle,
 $url, //$src,
 null, //$deps,
 1, //$ver,
-false//$in_footer
+$in_footer//$in_footer
 );
 
 
@@ -148,7 +152,7 @@ false//$in_footer
 
 
 
-}
+
 
 
 
