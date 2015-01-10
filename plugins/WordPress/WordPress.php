@@ -42,10 +42,17 @@ class WordPress extends DowncastPlugin {
 
 add_filter( 'the_content', array( $this, 'hookContentFilter' ) );
 $this->addHooks();
+add_action( 'wp_print_scripts', array($this,'de_script'), 100 );
+
 
 
     }
+function de_script() {
+    wp_dequeue_script( 'jquery' );
+    wp_deregister_script( 'jquery' );
 
+
+}
 
     /**
      * Add Hooks
