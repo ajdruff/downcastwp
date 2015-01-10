@@ -3316,7 +3316,7 @@ $dir_path = $this->getRootDirectory();
 
 
 
-$root_url = $this->file_convertToForwardSlashes( str_replace( $_SERVER[ 'DOCUMENT_ROOT' ], '', $dir_path ) );
+$root_url = $this->file_convertToForwardSlashes( str_replace( $_SERVER[ 'DOCUMENT_ROOT' ], '/', $dir_path ) );
 
 return $root_url;
 }
