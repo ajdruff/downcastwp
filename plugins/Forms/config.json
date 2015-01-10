@@ -43,7 +43,7 @@
                                             "id": "forms.js",
                                             "active": true,
                                             "inline": false,
-                                            "footer": true,
+                                            "footer": false,
                                             "path": "/js/forms.js"
                                         }
 
