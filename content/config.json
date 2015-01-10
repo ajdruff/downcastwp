@@ -48,7 +48,7 @@
                             "PLUGINS":
                                     {
                                         "SharedScripts":
-                                                {"active": false},
+                                                {"active": true},
                                         "WordPress":
                                                 {"active": true},                                        
                                         "Forms":
