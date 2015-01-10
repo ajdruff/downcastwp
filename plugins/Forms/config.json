@@ -44,6 +44,8 @@
                                             "active": true,
                                             "inline": false,
                                             "footer": false,
+                                          "comment": "must be loaded in head",                                            
+                                            "deps": ["jquery"],
                                             "path": "/js/forms.js"
                                         }
 

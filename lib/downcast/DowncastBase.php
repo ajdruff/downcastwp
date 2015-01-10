@@ -3350,13 +3350,17 @@ return $result;
 * Converts a resource path into a string containining inline css or js, or resource links
 *
 *
-* @param $path string The path to the resource
+* @param $resource_relative_path string The path to the resource root directory
 * @param $css bool True if the resource is css, false if script
-* @param $inline bool True if you want the resources returned as inline, false to return as resource links
- * @param $in_footer bool True if you want the resources added to footer, false if not This paramater is only use in the WordPress method 
+* @param $resource array Resource properties as set in config.json
 * @return string A concatenated string containing the resources either as inline <style></style> and <script></script> tags or linked resource
 */
-protected function _implodeResource( $resource_relative_path, $path, $css = true, $inline = false,$in_footer ) {
+protected function _implodeResource( $resource_relative_path, $css = true, $resource ) {
+    $path=$resource['path'];
+    $inline=$resource[ 'inline' ]; //True if you want the resources returned as inline, false to return as resource links
+    $in_footer=$resource[ 'footer' ];
+    $deps=$resource[ 'deps' ];
+    $handle=$resource[ 'id' ];
 //initialize
 $string = '';
 
@@ -3566,7 +3570,7 @@ $resource[ 'id' ] = isset( $resource[ 'id' ] ) ? $resource[ 'id' ] : $resource[ 
 $resource[ 'active' ] = isset( $resource[ 'active' ] ) ? $resource[ 'active' ] : $resource[ 'active' ];
 $resource[ 'inline' ] = isset( $resource[ 'inline' ] ) ? $resource[ 'inline' ] : false;
 $resource[ 'footer' ] = isset( $resource[ 'footer' ] ) ? $resource[ 'footer' ] : false;
-
+$resource[ 'deps' ] = isset( $resource[ 'deps' ] ) ? $resource[ 'deps' ] : array();
 /*
 * Exclude Inactive Resources
 */
@@ -3585,10 +3589,8 @@ $resource[ 'inline' ] = $resource[ 'inline' ] && $this->CONFIG[ 'SITE' ][ 'CONFI
 $resource_string = $this->_implodeResource
 (
 $resource_relative_path, //relative path to config.json
-$resource[ 'path' ], //path
 $css, //true if css
-$resource[ 'inline' ], //inline
-        $resource[ 'footer' ] //footer
+$resource //array of resource properties
 );
 
 $css_inline .= ($resource[ 'inline' ] ) ? $resource_string : '';
@@ -3607,10 +3609,8 @@ $resource[ 'inline' ] = $resource[ 'inline' ] && $this->CONFIG[ 'SITE' ][ 'CONFI
 $resource_string = $this->_implodeResource
 (
 $resource_relative_path, //relative path to config.json
-$resource[ 'path' ], //path
 $css, //true if css
-$resource[ 'inline' ], //inline
-        $resource[ 'footer' ] //footer
+$resource //array of resource properties
 );
 if ( $resource[ 'footer' ] ) {
 
