@@ -69,6 +69,8 @@ protected function _implodeResource( $resource_relative_path, $css = true, $reso
     $deps=$resource[ 'deps' ];
     $handle=$resource[ 'id' ];
     
+    
+
 
 //
 //
@@ -96,11 +98,13 @@ $url = $path;
 {
 
 
-$url = $this->file_joinPaths( $this->file_getRootUrl(),$resource_relative_path, $path );
+            $url = $this->file_joinPaths( $this->getRootUrl(),$resource_relative_path, $path );
 
 
 
 }
+
+
 if ( $inline ){
 
 $link = $this->addLeadingSlash( $this->file_joinPaths( $resource_relative_path, $path ) );
@@ -133,9 +137,12 @@ return $string;
 if ( $css ) {
 
     
-    
- 
-            
+  
+
+
+
+
+
     wp_enqueue_style(
 $handle, //$handle,
 $url, //$src,
@@ -199,6 +206,23 @@ echo $this->CONTENT_TAGS['JS_FOOTER'];
     echo $this->_addScriptVars('','');
 
 }
+
+/**
+     * Get Root Url
+     *
+     * Returns the url to the root of the downcast directory without the leading domain e.g. : '/wp-content/plugins/downcastwp'
+     *
+     * @param none
+     * @return void
+     */
+    public function getRootUrl( ) {
+        
+
+
+//return '/wp-content/plugins/downcastwp';
+    
+ return ( str_replace( site_url(), '', plugins_url('downcastwp') ));
+    }
 }
 
 ?>
