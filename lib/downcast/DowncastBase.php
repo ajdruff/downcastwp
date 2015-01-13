@@ -188,13 +188,7 @@ private $_page_info = null;
 * @return void
 */
 protected function _config() {
-/*
-* Root Directory Path
-* This is the path to the application's root directory (not CONTENT_ROOT);
-* assumes this file resides in /lib/downcast/
-* Use $this->getAbsPath() to retrieve its value
-*/
-$this->setRootDirectory( dirname( dirname( dirname( __FILE__ ) ) ) );
+
 
 
 /*
@@ -2172,21 +2166,7 @@ $this->_action_hooks[ $hook_name ][] = $callback;
 
 }
 
-private $_root_directory = null;
 
-/**
-* Set Root Directory
-*
-* Sets the Root Directory Path
-*
-* @param none
-* @return void
-*/
-public function setRootDirectory( $path ) {
-
-$this->_root_directory = $path;
-
-}
 
 /**
 * Get Root Directory Path (**Not** Content Root)
@@ -2196,7 +2176,15 @@ $this->_root_directory = $path;
 * @return string The path to the root directory
 */
 public function getRootDirectory() {
-return $this->file_convertToForwardSlashes( $this->_root_directory );
+    
+ /*
+* Root Directory Path
+* This is the path to the application's root directory (not CONTENT_ROOT);
+* assumes this file resides in /lib/downcast/
+* Use $this->getAbsPath() to retrieve its value
+*/
+   
+return $this->file_convertToForwardSlashes( dirname( dirname( dirname( __FILE__ ))) );
 
 }
 
@@ -3124,7 +3112,7 @@ $debug_array = debug_backtrace();
 $line = $debug_array[ 0 ][ 'line' ];
 $file = $debug_array[ 0 ][ 'file' ];
 $function = $debug_array[ 1 ][ 'function' ];
-$class = $debug_array[ 1 ][ 'class' ];
+$class = (isset($debug_array[ 1 ][ 'class' ]))?$debug_array[ 1 ][ 'class' ]:'';
 
 $line = is_null( $line ) ? "" : "($line)";
 
@@ -3305,20 +3293,18 @@ return $result;
 /**
 * Get Root Url
 *
-* Returns a URL to the root of downcast
+* Returns a URL to the root of downcast directory without the leading domain
+ * Provided as a method so you can override it when used within WordPress
+ * Standalone: '/'
+ * WordPress: '/wp-content/plugins/downcastwp'
 *
 * @param none
 * @return void
 */
-public function file_getRootUrl() {
+public function getRootUrl() {
 
-$dir_path = $this->getRootDirectory();
-
-
-
-$root_url = $this->file_convertToForwardSlashes( str_replace( $_SERVER[ 'DOCUMENT_ROOT' ], '/', $dir_path ) );
-
-return $root_url;
+    return '/';
+    
 }
 
 /**
