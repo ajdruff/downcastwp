@@ -1,0 +1,47 @@
+{"PLUGIN":
+            {
+                "INFO":
+                        {
+                            "NAME": "ezSQL",
+                            "DESCRIPTION": "ezSQL is a widget that makes it ridiculously easy for you to use PHP-PDO, mySQL, Oracle8, InterBase/FireBird, PostgreSQL, SQLite (PHP), SQLite (C++) or MS-SQL database(s).WordPress's database object is based on ezSQL - Read more at http://justinvincent.com/ezsql",
+                            "COMMENT": "",
+                            "VERSION": "1.0"
+
+                        },
+                "CONFIG":
+                        {
+                            "CSS":
+                                    [
+                                        {
+                                            "id": "example-css",
+                                            "active": false,
+                                            "inline": false,
+                                            "footer": false,
+                                            "path": "/add/path/to/css/here/style.css"
+                                        }
+
+
+
+                                    ],
+                            "JS":
+                                    [
+                                        {
+                                            "id": "example-script",
+                                            "active": false,
+                                            "inline": false,
+                                            "footer": false,
+                                            "path": "/add/path/to/css/here/script.js"
+                                        }
+
+
+
+                                    ]
+
+
+                        },
+                "EMBED_TAGS": {
+                },
+                "CONTENT_TAGS": {
+                }
+            }
+}  

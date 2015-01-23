@@ -188,14 +188,20 @@ private $_page_info = null;
 * @return void
 */
 protected function _config() {
-/*
-* Root Directory Path
-* This is the path to the application's root directory (not CONTENT_ROOT);
-* assumes this file resides in /lib/downcast/
-* Use $this->getAbsPath() to retrieve its value
-*/
-$this->setRootDirectory( dirname( dirname( dirname( __FILE__ ) ) ) );
 
+    
+    /*
+     * 
+     * Timezone Setting Warning Fix
+     * 
+     * This fixes the PHP Warning: 'It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function...'
+     * ref: http://stackoverflow.com/questions/5535514/how-to-fix-warning-from-date-in-php
+     * 
+     * To Change the Timezone: If you need to change the timezone, don't do it here.
+     * instead, add a similar line to Downcast::config() method.
+     */
+    ini_set('date.timezone', 'America/Los_Angeles');
+    
 
 /*
 * Debug
@@ -277,6 +283,8 @@ protected function _init() {
 * Add Powered By Tag
 */
 $this->addContentTag( 'POWERED_BY', '<a href="#"><span class="label">Powered by DownCast &reg;</span></a>' );
+
+
 $this->addContentTag( 'PAGE_GENERATION_TIME', 'Page Generation Time: ' . date( 'Y-m-d H:i:s' ) );
 
 
@@ -1030,6 +1038,28 @@ public function readConfigFile( $_config_file_path ) {
 */
 
 $config_file_path = $this->file_getRealPath( $_config_file_path );
+
+/*
+ * 
+ * Load config-cli.json if exists
+ * If being run from the command line
+ * 
+ */
+if (PHP_SAPI === 'cli')  //if running via command line
+{ 
+
+   
+$cli_config_file_path=str_replace('.json','-cli.json',$config_file_path);
+ 
+if ( file_exists($cli_config_file_path)) {
+    $config_file_path =$cli_config_file_path;
+}
+
+
+
+} 
+
+
 
 
 
@@ -2172,21 +2202,7 @@ $this->_action_hooks[ $hook_name ][] = $callback;
 
 }
 
-private $_root_directory = null;
 
-/**
-* Set Root Directory
-*
-* Sets the Root Directory Path
-*
-* @param none
-* @return void
-*/
-public function setRootDirectory( $path ) {
-
-$this->_root_directory = $path;
-
-}
 
 /**
 * Get Root Directory Path (**Not** Content Root)
@@ -2196,7 +2212,15 @@ $this->_root_directory = $path;
 * @return string The path to the root directory
 */
 public function getRootDirectory() {
-return $this->file_convertToForwardSlashes( $this->_root_directory );
+    
+ /*
+* Root Directory Path
+* This is the path to the application's root directory (not CONTENT_ROOT);
+* assumes this file resides in /lib/downcast/
+* Use $this->getAbsPath() to retrieve its value
+*/
+   
+return $this->file_convertToForwardSlashes( dirname( dirname( dirname( __FILE__ ))) );
 
 }
 
@@ -3124,7 +3148,7 @@ $debug_array = debug_backtrace();
 $line = $debug_array[ 0 ][ 'line' ];
 $file = $debug_array[ 0 ][ 'file' ];
 $function = $debug_array[ 1 ][ 'function' ];
-$class = $debug_array[ 1 ][ 'class' ];
+$class = (isset($debug_array[ 1 ][ 'class' ]))?$debug_array[ 1 ][ 'class' ]:'';
 
 $line = is_null( $line ) ? "" : "($line)";
 
@@ -3155,8 +3179,8 @@ return;
 * Finally, display message or stop if appropriate
 */
 
-if ( is_array( $var ) ){
-echo "<br><strong style=\"color:green\"> Debug:$line/$class/$function()</strong><pre>" . $text, htmlspecialchars( print_r( $var, true ) ), '</pre>';
+if ( is_array( $var ) || is_object($var) ){
+echo "<br><strong style=\"color:green\"> Debug:$line/$class/$function()</strong><pre>" . $text , htmlspecialchars( print_r( $var, true ) ), '</pre>';
 } else {
 
 echo "<br><strong style=\"color:green\"> Debug:$line/$class/$function()</strong><pre>" . $text . ' ' . htmlspecialchars( $var ) . '</pre>';
@@ -3170,21 +3194,23 @@ if ( $stop ) {
 * Add Backtrace
 * Grab the nice ouput of debug_print_backtrace using
 * output buffering,
-* then use regex to remove the first part since its the debug function call that we alread have
+* then remove the first part since its the debug function call that we alread have
 */
 ob_start();
 debug_print_backtrace();
 $backtrace = htmlspecialchars( ob_get_clean() );
 
+/*
+ * Bug Fix 1-19-2015: server reset when array is too large. remove first line
+ * by using explode/implode instead of regex which for 
+ * some reason was the cause of the server reset
+ */
 
+$backtrace_lines=explode("\n",$backtrace);
+unset($backtrace_lines[0]);
+$backtrace=implode("\n",$backtrace_lines);
 
-$pattern = '/#0(?:(?!#1).)*/ims';
-$replacement = '';
-$backtrace = preg_replace( $pattern, $replacement, $backtrace );
-
-
-
-echo '<br><div style="color:brown;"><pre>########   BACKTRACE ########<br>', $backtrace, '</pre</div>';
+echo '<br><div style="color:brown;"><pre>########   BACKTRACE ########<br>'. $backtrace. '</pre></div>';
 die( "<br>Exited for debug $line " . $file );
 
 
@@ -3305,20 +3331,18 @@ return $result;
 /**
 * Get Root Url
 *
-* Returns a URL to the root of downcast
+* Returns a URL to the root of downcast directory without the leading domain
+ * Provided as a method so you can override it when used within WordPress
+ * Standalone: '/'
+ * WordPress: '/wp-content/plugins/downcastwp'
 *
 * @param none
 * @return void
 */
-public function file_getRootUrl() {
+public function getRootUrl() {
 
-$dir_path = $this->getRootDirectory();
-
-
-
-$root_url = $this->file_convertToForwardSlashes( str_replace( $_SERVER[ 'DOCUMENT_ROOT' ], '/', $dir_path ) );
-
-return $root_url;
+    return '/';
+    
 }
 
 /**
