@@ -555,3 +555,77 @@ The DownCast Forms plugin allows you to use any validation rule that is provided
 
 
 ####Walkthrough - Add Validation Rules to Your Form
+
+
+##Form Options
+
+To set options, add the following right before rending the form:
+
+        $options = array(
+            'hide_on_success' => false, //hides the form on success
+            'collapse_on_hide' => true, //completely removes all form html from page when form is hidden);
+            'reset_on_success' => false,
+            "view" => new View_Inline,
+            "labelToPlaceholder" => 0
+        );
+        $form->setAjaxOptions( $options );
+
+
+The following options are supported:
+
+* **`response_target`** 
+    * the id of the DOM element that should display any messages      
+* **`hide_on_success`**
+    * hides the form on success
+* **`collapse_on_hide`**
+    * completely removes all form html from page when form is hidden
+* **`reset_on_success`**
+    * reset form after successful submission
+* **`success_message`**
+    * default success message  //the default success message if the form handler does not supply one.
+* **`error_message`**
+    *  the default error message if the form handler does not supply one.
+
+
+
+
+
+>**dev note** 
+>To add additional options, edit DowncastForms::setAjaxOptions
+
+
+####Problem: Error Message Does Not Appear in response_target
+
+You've set a custom `response_target` in your options and an error message appears above the form.
+
+This occurs when the error being generated it is from the PFBC core code which the Forms plugin cannot change. You can work around this  by validating your code using 'server side' validation using setValidation methods instead of the inline PFBC core validation methods.
+
+
+##Problem: Spinner/Ajax-Loader not appearing 
+
+Normally, the spinner will appear in the center of the response location. 
+
+If you are using a custom response_target , by setting the response_target option,
+you must add a 'class="response_target"' for the spinner to appear properly.
+
+
+
+##How to Change the Ajax Loader Image
+
+Either rename the image you want to ajax-loader.html or add the following to your options: 
+
+           'ajax_loader_html'=> '<img src="'.$this->plugin()->getRootUrl().'/path/to/ajax-loader.png" class="ajax-loader">',
+
+
+##Troubleshooting With Git  
+
+1.  make a copy of everything  
+1.  git/add all to pick up any untracked files 
+1. git/stash using the -all option
+1. switch to master branch
+1. create a new branch based on the branch you were working on but is now pristine
+1. switch to that new 'troubleshooting branch'
+1. apply the stash
+1. commit everything to the troubleshooting branch
+1. revert the suspected file using the netbeans history option
+1. do a compare with the version that was committed.
