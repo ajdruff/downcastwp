@@ -47,6 +47,12 @@
                                     },
                             "PLUGINS":
                                     {
+                                
+                                
+                                        "ezSQL":
+                                                {"active": true},                                
+                                             "FindMyHost":
+                                                {"active": true},                                
                                         "DemoForms":
                                                 {"active": false},
                                         "SharedScripts":
@@ -57,6 +63,8 @@
                                                 {"active": true},
                                         "CSSNamespace":
                                                 {"active": true}
+                                        
+                                        
                                     },
                             "SKINS_AVAILABLE":
                                     {
@@ -91,7 +99,7 @@
                                                 {"active": false},
                                         "ViewSource":
                                                 {"active": false}
-                                    },
+                                    },                                  
                             "TEMPLATE": "fluid",
                             "COMMENT_BASE_DIRECTORIES": "Must be full absolute path",
                             "SKIN_BASE_DIRECTORY": "/skins/",

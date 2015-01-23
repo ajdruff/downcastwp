@@ -50,20 +50,43 @@ class Forms extends DowncastPlugin {
      * @return void
      */
     public function config() {
-
-        if ( false ){
-            /*
-             * Map Ajax Actions
-             */
-            $this->addAjaxAction(
-                    'MyAction', //action name submitted by form
-                    array( $this, 'MyOtherAction' ) //method to call when action is triggered
-            );
-        }
+        
         /*
          * Map Example Files to Urls
          */
         $this->downcast()->addPage( '/ajax/handler/', dirname( __FILE__ ) . '/content/ajax.php' );
+        
+        
+
+        
+              /*
+             * Map Ajax Action for Find My Host Form Handler
+             */
+            $this->addAjaxAction(
+                    'find_host', //action name submitted by form
+                    array( $this->downcast()->getPlugin('FindMyHost'), 'formActionFindHost' ) //method to call when action is triggered
+            );      
+        
+             
+              /*
+             * Map Ajax Action for Find My Host Form Handler
+             */
+            $this->addAjaxAction(
+                    'phpwhois_example', //action name submitted by form
+                    array( $this->downcast()->getPlugin('FindMyHost'), 'formActionWhois' ) //method to call when action is triggered
+            );     
+        
+     
+                         
+              /*
+             * Map Ajax Action for Find My Host Form Handler
+             */
+            $this->addAjaxAction(
+                    'phpwhois_internal', //action name submitted by form
+                    array( $this->downcast()->getPlugin('FindMyHost'), 'formActionWhoisInternal' ) //method to call when action is triggered
+            );    
+        
+
 
       //  $this->downcast()->addPage( '/downcast2/', dirname( __FILE__ ) . '/content/my-first-form.php' );
         
