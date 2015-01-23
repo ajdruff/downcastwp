@@ -134,10 +134,34 @@ private function _common_init() {
 
 }
 
+/**
+     * Get Root Directory 
+     *
+     * Returns the path to the plugin's directory
+     *
+     * @param none
+     * @return void
+     */
+    public function getRootDirectory() {
+        
+        return ($this->downcast()->file_joinPaths($this->downcast()->getRootDirectory() ,'/plugins/'.get_class($this)));
+
+    }
 
 
+/**
+     * Get Root Directory 
+     *
+     * Returns the path to the plugin's directory
+     *
+     * @param none
+     * @return void
+     */
+    public function getRootUrl() {
+        
+        return ($this->downcast()->file_joinPaths($this->downcast()->getRootUrl() ,'/plugins/'.get_class($this)));
 
-
+    }
 
 }
 
