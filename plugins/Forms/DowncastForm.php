@@ -357,10 +357,12 @@ $this->setAjaxOptions( array('action'=>$action) );
          * Client side validation is handled by 
          */
 
+
         if ( !$this->isValid(
                         $this->id(), //form identifier
                         $clear //whether to clear values on submission (regardless if valid)
                 ) ) {
+      
             return;
 
 
@@ -403,6 +405,7 @@ $this->setAjaxOptions( array('action'=>$action) );
 
 
                 $field_value = $_POST[ $field_name ];
+        
 
 
 
@@ -556,7 +559,7 @@ $this->setAjaxOptions( array('action'=>$action) );
 
 
         preg_match(
-                '/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/' //$pattern
+                '/^(?:http(?:s)?:\/\/)?[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/' //$pattern
                 , $domain_name  //$sourcestring
                 , $matches //$matches to hold matching substrings
         );
