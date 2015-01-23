@@ -28,6 +28,15 @@ class Downcast extends DowncastBase   {
 
 public function config() {
 
+    /*
+     * Change Time Zone Here if needed
+     *     ini_set('date.timezone', 'Asia/Calcutta');
+     * http://php.net/manual/en/timezones.php for a list of timezones
+     * To check which timezone you are using, add this line: echo date_default_timezone_get();
+     */
+    
+
+    
 
 /*
 * SITE_CONFIG_FILE_PATH
