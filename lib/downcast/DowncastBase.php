@@ -189,6 +189,19 @@ private $_page_info = null;
 */
 protected function _config() {
 
+    
+    /*
+     * 
+     * Timezone Setting Warning Fix
+     * 
+     * This fixes the PHP Warning: 'It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function...'
+     * ref: http://stackoverflow.com/questions/5535514/how-to-fix-warning-from-date-in-php
+     * 
+     * To Change the Timezone: If you need to change the timezone, don't do it here.
+     * instead, add a similar line to Downcast::config() method.
+     */
+    ini_set('date.timezone', 'America/Los_Angeles');
+    
 
 
 /*
