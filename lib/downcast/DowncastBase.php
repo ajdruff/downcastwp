@@ -203,7 +203,6 @@ protected function _config() {
     ini_set('date.timezone', 'America/Los_Angeles');
     
 
-
 /*
 * Debug
 */
@@ -284,6 +283,8 @@ protected function _init() {
 * Add Powered By Tag
 */
 $this->addContentTag( 'POWERED_BY', '<a href="#"><span class="label">Powered by DownCast &reg;</span></a>' );
+
+
 $this->addContentTag( 'PAGE_GENERATION_TIME', 'Page Generation Time: ' . date( 'Y-m-d H:i:s' ) );
 
 
@@ -3156,8 +3157,8 @@ return;
 * Finally, display message or stop if appropriate
 */
 
-if ( is_array( $var ) ){
-echo "<br><strong style=\"color:green\"> Debug:$line/$class/$function()</strong><pre>" . $text, htmlspecialchars( print_r( $var, true ) ), '</pre>';
+if ( is_array( $var ) || is_object($var) ){
+echo "<br><strong style=\"color:green\"> Debug:$line/$class/$function()</strong><pre>" . $text , htmlspecialchars( print_r( $var, true ) ), '</pre>';
 } else {
 
 echo "<br><strong style=\"color:green\"> Debug:$line/$class/$function()</strong><pre>" . $text . ' ' . htmlspecialchars( $var ) . '</pre>';
@@ -3171,21 +3172,23 @@ if ( $stop ) {
 * Add Backtrace
 * Grab the nice ouput of debug_print_backtrace using
 * output buffering,
-* then use regex to remove the first part since its the debug function call that we alread have
+* then remove the first part since its the debug function call that we alread have
 */
 ob_start();
 debug_print_backtrace();
 $backtrace = htmlspecialchars( ob_get_clean() );
 
+/*
+ * Bug Fix 1-19-2015: server reset when array is too large. remove first line
+ * by using explode/implode instead of regex which for 
+ * some reason was the cause of the server reset
+ */
 
+$backtrace_lines=explode("\n",$backtrace);
+unset($backtrace_lines[0]);
+$backtrace=implode("\n",$backtrace_lines);
 
-$pattern = '/#0(?:(?!#1).)*/ims';
-$replacement = '';
-$backtrace = preg_replace( $pattern, $replacement, $backtrace );
-
-
-
-echo '<br><div style="color:brown;"><pre>########   BACKTRACE ########<br>', $backtrace, '</pre</div>';
+echo '<br><div style="color:brown;"><pre>########   BACKTRACE ########<br>'. $backtrace. '</pre></div>';
 die( "<br>Exited for debug $line " . $file );
 
 
