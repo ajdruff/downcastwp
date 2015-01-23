@@ -1,5 +1,5 @@
 
-##v1.1##
+##v1.1.1##
 >*Fri Jan 23 13:06:10 2015 -0800*  
 [view commit](http://github.com/simpliwp/downcastwp/commit/f2be106f0a2106f52b0d7540255694de98028b18) 
 
