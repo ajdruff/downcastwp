@@ -1,0 +1,119 @@
+{"SITE":
+            {
+                "INFO":
+                        {
+                            "NAME": "DownCast",
+                            "DOMAIN": "downcast.com",
+                            "TAG_LINE": "Your Markdown Files on The Web - Downcast.com",
+                            "DESCRIPTION": "My Awesome site",
+                            "COMMENT": "Command Line Configuration File",
+                            "VERSION": "1.0"
+
+                        },
+                "CONFIG":
+                        {
+                            "SKINS":
+                                    {
+                                        "amelia":
+                                                {"active": false, "path": "/bootstrap/2.3.2-namespaced/amelia"},
+                                        "cerulean":
+                                                {"active": true, "path": "/bootstrap/2.3.2-namespaced/cerulean"},
+                                        "cosmo":
+                                                {"active": false, "path": "/bootstrap/2.3.2-namespaced/cosmo"},
+                                        "cyborg":
+                                                {"active": false, "path": "/bootstrap/2.3.2-namespaced/cyborg"},
+                                        "default":
+                                                {"active": false, "path": "/bootstrap/2.3.2-namespaced/default"},
+                                        "flatly":
+                                                {"active": false, "path": "/bootstrap/2.3.2-namespaced/flatly"},
+                                        "journal":
+                                                {"active": false, "path": "/bootstrap/2.3.2-namespaced/journal"},
+                                        "readable":
+                                                {"active": false, "path": "/bootstrap/2.3.2-namespaced/readable"},
+                                        "simplex":
+                                                {"active": false, "path": "/bootstrap/2.3.2-namespaced/simplex"},
+                                        "slate":
+                                                {"active": false, "path": "/bootstrap/2.3.2-namespaced/slate"},
+                                        "spacelab":
+                                                {"active": false, "path": "/bootstrap/2.3.2-namespaced/spacelab"},
+                                        "spruce":
+                                                {"active": false, "path": "/bootstrap/2.3.2-namespaced/spruce"},
+                                        "superhero":
+                                                {"active": false, "path": "/bootstrap/2.3.2-namespaced/superhero"},
+                                        "united":
+                                                {"active": false, "path": "/bootstrap/2.3.2-namespaced/united"},
+                                        "highlightjs":
+                                                {"active": false, "path": "/highlightjs/8.3"}
+                                    },
+                            "PLUGINS":
+                                    {
+                                
+                                
+                                        "ezSQL":
+                                                {"active": true},                                
+                                             "FindMyHost":
+                                                {"active": true}                               
+                                        
+                                        
+                                    },
+                            "SKINS_AVAILABLE":
+                                    {
+                                    },
+                            "PLUGINS_AVAILABLE":
+                                    {
+                                        "DemoForms":
+                                                {"active": false},
+                                        "DemoSkins":
+                                                {"active": false},
+                                        "ExampleAddContent":
+                                                {"active": false},
+                                        "Forms":
+                                                {"active": false},
+                                        "HelloWorld":
+                                                {"active": false},
+                                        "Inspector":
+                                                {"active": false},
+                                        "Markdowner":
+                                                {"active": false},
+                                        "SharedScripts":
+                                                {"active": false},
+                                        "Skinner":
+                                                {"active": false},
+                                        "Tagger":
+                                                {"active": false},
+                                        "Templater":
+                                                {"active": false},
+                                        "Texter":
+                                                {"active": false},
+                                        "ThemeSeattle":
+                                                {"active": false},
+                                        "ViewSource":
+                                                {"active": false}
+                                    },                                  
+                            "TEMPLATE": "fluid",
+                            "COMMENT_BASE_DIRECTORIES": "Must be full absolute path",
+                            "SKIN_BASE_DIRECTORY": "/skins/",
+                            "TEMPLATE_BASE_DIRECTORY": "C:\\wamp\\www\\getdowncast.com\\templates\\",
+                            "TEMPLATE_BASE_DIRECTORY_OLD": "C:\\wamp\\www\\getdowncast.com\\templates\\",
+                            "TEMPLATE_FILE_NAME": "index.php",
+                            "MARKDOWN_EXTENSION": ".md",
+                            "SAFE_PARSE": true,
+                            "INDEX_FILES": [
+                                "index.php",
+                                "index.html",
+                                "index.html",
+                                "index.md"
+                            ],
+                            "CSS_INLINE_ENABLED": false,
+                            "JS_INLINE_ENABLED": true
+
+                        },
+                "EMBED_TAGS_INACTIVE": {
+                    "SIDE_BAR": "sidebar.md",
+                    "NAV_BAR": "navbar.md"
+                },
+                "CONTENT_TAGS": {
+                    "HELLO_WORLD": "Hello World!"
+                }
+            }
+}  

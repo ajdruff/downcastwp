@@ -1025,6 +1025,28 @@ public function readConfigFile( $_config_file_path ) {
 
 $config_file_path = $this->file_getRealPath( $_config_file_path );
 
+/*
+ * 
+ * Load config-cli.json if exists
+ * If being run from the command line
+ * 
+ */
+if (PHP_SAPI === 'cli')  //if running via command line
+{ 
+
+   
+$cli_config_file_path=str_replace('.json','-cli.json',$config_file_path);
+ 
+if ( file_exists($cli_config_file_path)) {
+    $config_file_path =$cli_config_file_path;
+}
+
+
+
+} 
+
+
+
 
 
 /*
