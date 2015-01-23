@@ -1,0 +1,21 @@
+
+/*
+* Ajax Spinner/loader styling
+http://stackoverflow.com/a/7123685/3306354
+
+*/
+.response_target {
+  height: 32px;
+   margin-top:32px;
+  margin-bottom:32px;
+  position: relative;
+}
+
+.ajax-loader {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}

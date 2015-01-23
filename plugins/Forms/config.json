@@ -13,11 +13,11 @@
                             "CSS":
                                     [
                                         {
-                                            "id": "example-css",
-                                            "active": false,
-                                            "inline": false,
+                                            "id": "forms.css",
+                                            "active": true,
+                                            "inline": true,
                                             "footer": false,
-                                            "path": "/add/path/to/css/here/style.css"
+                                            "path": "/css/forms.css"
                                         }
 
 
