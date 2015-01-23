@@ -820,7 +820,12 @@ $form_options=(isset($all_script_vars['plugins']['Forms'][$this->id()]))?$all_sc
 
         $defaults = array(
          'action' => 'action_warning', 
-            'response_target' => 'downcast_response_target', //the id of the DOM element that should display any messages       
+            'response_target' => 'downcast_response_target', //the id of the DOM element that should display any messages    
+            'response_target_attributes' => 'class="response_target"', //any attributes to be added to the downcast_response_target element. e.g: class="response_target" 
+
+            
+           'ajax_loader_html'=> '<img src="'.$this->plugin()->getRootUrl().'/content/img/ajax-loader.png" class="ajax-loader">',
+            
             'hide_on_success' => true, //hides the form on success
             'collapse_on_hide' => false, //completely removes all form html from page when form is hidden
             'reset_on_success' => true, //reset form after successful submission
